@@ -29,7 +29,30 @@ export class Contact {
     }
   }
 
-  static async get(id: string) {
+  static async update(id: string, contact: Contact) {
+    try {
+      if (contact.name) {
+        await pool.query(`UPDATE contacts SET name = '${contact.name}' WHERE id = ${id};`)
+      }
+      if (contact.phone) {
+        await pool.query(`UPDATE contacts SET phone = '${contact.phone}' WHERE id = ${id};`)
+      }
+      return { id: id }
+    } catch (error) {
+      console.log('error updating contact', error)
+    }
+  }
+
+  static async getById(id: string): Promise<Contact> {
+    try {
+      const data = await pool.query(`SELECT * FROM contacts WHERE id = '${id}';`)
+      return data.rows[ 0 ] as Contact
+    } catch (error) {
+      console.log('error getting contacts', error)
+    }
+  }
+
+  static async getByUserId(id: string) {
     try {
       const data = await pool.query(`SELECT * FROM contacts WHERE creator = '${id}';`)
       return data.rows

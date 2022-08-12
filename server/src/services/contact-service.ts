@@ -1,4 +1,5 @@
 import { Contact } from '../database/models/contact-model'
+import { ApiError } from '../utils/api-errors'
 
 class ContactsService {
   async create (contact: Contact) {
@@ -6,8 +7,17 @@ class ContactsService {
       return contactData
   }
 
-  async get(id: string) {
-    const data = Contact.get(id)
+  async getByUserId(id: string) {
+    const data = Contact.getByUserId(id)
+    return data
+  }
+
+  async update(id: string, userId: string, contact: Contact) {
+    const contactData = await Contact.getById(id)
+    if (contactData.creator != userId) {
+      throw ApiError.UnauthorizedError()
+    }
+    const data = Contact.update(id, contact)
     return data
   }
 }
