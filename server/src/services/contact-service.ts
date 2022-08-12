@@ -20,6 +20,15 @@ class ContactsService {
     const data = Contact.update(id, contact)
     return data
   }
+
+  async delete(id: string, userId: string) {
+    const contactData = await Contact.getById(id)
+    if (contactData.creator != userId) {
+      throw ApiError.UnauthorizedError()
+    }
+    const data = Contact.delete(id)
+    return data
+  }
 }
 
 export default new ContactsService()

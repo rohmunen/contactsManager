@@ -60,4 +60,13 @@ export class Contact {
       console.log('error getting contacts', error)
     }
   }
+
+  static async delete(id: string) {
+    try {
+      const data = await pool.query(`DELETE FROM contacts WHERE id = '${id}';`)
+      return data.rows
+    } catch (error) {
+      console.log('error deleting contact', error)
+    }
+  }
 }

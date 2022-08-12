@@ -39,6 +39,18 @@ class ContactsController {
       next(e)
     }
   }
+
+  async delete(req: Request, res: Response, next: NextFunction){
+    try {
+      const authorizationHeader = req.header('Authorization').split(' ')[ 1 ]
+      const contactId = req.params.id
+      const { id } = tokenService.validateAccessToken(authorizationHeader)
+      const result = await contactService.delete(contactId, id)
+      return res.json(result)
+    } catch (e) {
+      next(e)
+    }
+  }
 }
 
 export default new ContactsController()

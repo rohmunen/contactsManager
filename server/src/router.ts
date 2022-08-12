@@ -8,5 +8,6 @@ router.post('/login', userController.login)
 router.post('/contacts', contactsController.create)
 router.get('/contacts', contactsController.get)
 router.put('/contacts/:id', contactsController.update)
+router.delete('/contacts/:id', contactsController.delete)
  
 export default router
