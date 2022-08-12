@@ -13,15 +13,15 @@ class UserController {
     }
   }
 
-  // async login(req, res, next) {
-  //   try {
-  //     const { email, password } = req.body
-  //     const userData = await userService.login(email, password)
-  //     return res.json(userData)
-  //   } catch (e) {
-  //     next(e)
-  //   }
-  // } 
+  async login(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { email, password } = req.body
+      const userData = await userService.login(email, password)
+      return res.json(userData)
+    } catch (e) {
+      next(e)
+    }
+  } 
 
   // async refresh(req, res, next) {
   //   try {
