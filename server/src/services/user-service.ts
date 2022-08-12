@@ -24,26 +24,13 @@ class UserService {
     return { token, expire: '1800' }
   }
 
-  // refresh(authorizationHeader) {
+  // refresh(authorizationHeader: string) {
   //   const userData = tokenService.validateAccessToken(authorizationHeader)
   //   if (!userData) {
   //     throw ApiError.UnauthorizedError()
   //   }
-  //   const userDto = new UserDto(userData)
-  //   const token = tokenService.generateToken({ ...userDto })
+  //   const token = tokenService.generateToken({ ...userData })
   //   return { token, expire: '1800' }
-  // }
-
-  // getUser(authorizationHeader) {
-  //   const userData = tokenService.validateAccessToken(authorizationHeader)
-  //   const user = User.getByEmail(userData.email)
-  //   return user
-  // }
-
-  // async update(authorizationHeader, user) {
-  //   const { id } = tokenService.validateAccessToken(authorizationHeader)
-  //   const result = await User.update(id, user)
-  //   return result
   // }
 }
 

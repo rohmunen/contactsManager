@@ -7,10 +7,10 @@ class TokensService {
     return accessToken
   }
 
-  validateAccessToken(token: string) {
+  validateAccessToken(token: string): UserDto {
     try {
       const userData = jwt.verify(token, process.env.ACCESS_SECRET)
-      return userData
+      return userData as UserDto
     } catch (error) {
       return null
     }
