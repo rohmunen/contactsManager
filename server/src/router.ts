@@ -5,6 +5,7 @@ const router = Router()
 
 router.post('/signup', userController.signin)
 router.post('/login', userController.login)
-router.post('/contact', contactsController.create)
+router.post('/contacts', contactsController.create)
+router.get('/contacts', contactsController.get)
  
 export default router

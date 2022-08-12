@@ -5,6 +5,11 @@ class ContactsService {
       const contactData = Contact.create(contact) 
       return contactData
   }
+
+  async get(id: string) {
+    const data = Contact.get(id)
+    return data
+  }
 }
 
 export default new ContactsService()

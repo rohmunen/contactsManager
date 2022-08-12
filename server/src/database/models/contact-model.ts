@@ -28,4 +28,13 @@ export class Contact {
       console.log('error creating contact', error)
     }
   }
+
+  static async get(id: string) {
+    try {
+      const data = await pool.query(`SELECT * FROM contacts WHERE creator = '${id}';`)
+      return data.rows
+    } catch (error) {
+      console.log('error getting contacts', error)
+    }
+  }
 }

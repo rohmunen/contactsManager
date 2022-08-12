@@ -14,6 +14,17 @@ class ContactsController {
       next(e)
     }
   }
+
+  async get(req: Request, res: Response, next: NextFunction) {
+    try {
+      const authorizationHeader = req.header('Authorization').split(' ')[1]
+      const { id } = tokenService.validateAccessToken(authorizationHeader)
+      const data = await contactService.get(id)
+      return res.json(data)
+    } catch (e) {
+      next(e)
+    }
+  }
 }
 
 export default new ContactsController()
