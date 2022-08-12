@@ -1,10 +1,7 @@
 import { Router } from "express";
+import userController from "./controllers/user-controller";
 const router = Router()
 
-router.get('/signin', (req, res, next) => {
-  res.json({
-    message: 'ok'
-  })
-})
+router.post('/signin', userController.signin)
  
 export default router

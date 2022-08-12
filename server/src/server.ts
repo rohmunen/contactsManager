@@ -16,6 +16,7 @@ export default class Server {
   static create() {
     const server = new Server
     server.initDb()
+    server.initMiddlewares()
     server.initRouter()
     server.initErrorHandling()
     return server
