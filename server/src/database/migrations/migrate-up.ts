@@ -26,7 +26,7 @@ const checkForTables = async () => {
     FROM information_schema.tables
     WHERE table_schema='public'
     AND table_type='BASE TABLE';`)
-    if (tables.rows.findIndex(table => table.table_name === 'users' || table.table_name === 'contacts') === -1) {
+    if (tables.rows.findIndex(table => table.table_name === 'users' || table.table_name === 'contacts' || table.table_name === 'tokens') === -1) {
       console.log('creating new tables')
       await client.query(`
       CREATE TABLE users (
@@ -43,6 +43,14 @@ const checkForTables = async () => {
         FOREIGN KEY (creator) REFERENCES users (id),
         name VARCHAR(40),
         phone VARCHAR(20)
+      );
+      `)
+      await client.query(`
+      CREATE TABLE tokens (
+        id SERIAL PRIMARY KEY,
+        owner UUID,
+        FOREIGN KEY (owner) REFERENCES users (id),
+        token TEXT
       );
       `)
     }

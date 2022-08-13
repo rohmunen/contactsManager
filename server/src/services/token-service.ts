@@ -6,17 +6,38 @@ import { ApiError } from '../utils/api-errors'
 
 class TokensService {
   generateToken(payload: UserDto) {
+    console.log('payload', payload)
     const accessToken = jwt.sign(payload, process.env.ACCESS_SECRET, { expiresIn: '30m' })
-    return accessToken
+    const refreshToken = jwt.sign(payload, process.env.ACCESS_SECRET, { expiresIn: '1800m' })
+    return { accessToken, refreshToken }
   }
 
   validateAccessToken(token: string): UserDto {
     try {
-      const userData = jwt.verify(token, process.env.ACCESS_SECRET)
-      return userData as UserDto
+      const data = jwt.verify(token, process.env.ACCESS_SECRET) as jwt.JwtPayload
+      const { exp, iat, ...rest } = data
+      return rest as UserDto
     } catch (error) {
       return null
     }
+  }
+
+  async writeTokenToDb(owner: string, token: string) {
+    try {
+      await Token.delete(owner)
+      const result = await Token.create(owner, token)
+      return result
+    } catch (e) {
+      console.log('error writing token to db ' + e)
+    }
+  }
+
+  async checkToken(owner: string) {
+    const result = await Token.get(owner)
+    if (!result) {
+      throw ApiError.UnauthorizedError()
+    }
+    return result
   }
 }
 

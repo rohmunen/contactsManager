@@ -5,12 +5,12 @@ import bcrypt from "bcrypt"
 import { ApiError } from "../utils/api-errors"
 
 class UserService {
-  async signin(email: string, nickname: string, password: string) {
+  async signup(email: string, nickname: string, password: string) {
     const user = await User.create({ email, nickname, password })
     const userDto = new UserDto(user)
-    const token = tokenService.generateToken({ ...userDto })
+    const tokens = tokenService.generateToken({ ...userDto })
 
-    return { token, expire: '1800' }
+    return { user: userDto, tokens: tokens }
   }
 
   async login(email: string, password: string) {
@@ -20,8 +20,8 @@ class UserService {
       throw ApiError.UnauthorizedError()
     }
     const userDto = new UserDto(user)
-    const token = tokenService.generateToken({ ...userDto })
-    return { token, expire: '1800' }
+    const tokens = tokenService.generateToken({ ...userDto })
+    return { user: userDto, tokens: tokens }
   }
 
   async refresh(token: string) {

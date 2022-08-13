@@ -7,7 +7,7 @@ class ContactsController {
   async create(req: Request, res: Response, next: NextFunction) {
     try {
       const { name, phone } = req.body
-      const authorizationHeader = req.header('Authorization').split(' ')[ 1 ]
+      const authorizationHeader = req.header('access-token')
       const { id } = tokenService.validateAccessToken(authorizationHeader)
       const result = await contactService.create({ creator: id, name, phone })
       return res.json(result)
@@ -18,10 +18,10 @@ class ContactsController {
 
   async get(req: Request, res: Response, next: NextFunction) {
     try {
-      const authorizationHeader = req.header('Authorization').split(' ')[ 1 ]
+      const authorizationHeader = req.header('access-token')
       const { id } = tokenService.validateAccessToken(authorizationHeader)
       const data = await contactService.getByUserId(id)
-      return res.json(data)
+      return res.json({contacts: data})
     } catch (e) {
       next(e)
     }
@@ -29,7 +29,7 @@ class ContactsController {
 
   async update(req: Request<{id: string}, {}, Contact>, res: Response, next: NextFunction) {
     try {
-      const authorizationHeader = req.header('Authorization').split(' ')[ 1 ]
+      const authorizationHeader = req.header('access-token')
       const contactId = req.params.id
       const { id } = tokenService.validateAccessToken(authorizationHeader)
       const contactData = req.body
@@ -42,7 +42,7 @@ class ContactsController {
 
   async delete(req: Request, res: Response, next: NextFunction){
     try {
-      const authorizationHeader = req.header('Authorization').split(' ')[ 1 ]
+      const authorizationHeader = req.header('access-token')
       const contactId = req.params.id
       const { id } = tokenService.validateAccessToken(authorizationHeader)
       const result = await contactService.delete(contactId, id)
