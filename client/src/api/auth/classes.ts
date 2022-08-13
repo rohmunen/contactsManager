@@ -5,6 +5,13 @@ export interface ReqSignUp {
 }
 
 export interface ResSignUp {
-  accessToken: string;
-  refreshToken: string;
+  tokens: {
+    accessToken: string;
+    refreshToken: string;
+  },
+  user: {
+    email: string;
+    id: string;
+    nickname: string;
+  }
 }

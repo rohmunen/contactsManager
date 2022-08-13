@@ -24,7 +24,7 @@ class AuthStore {
   signUp = async (data: {email: string, nickname: string, password: string}) => {
     const resp = await AuthAPI.singup(data)
     if (resp.data) {
-      this.setAuth({accessToken: resp.data?.accessToken, refreshToken: resp.data?.refreshToken})
+      this.setAuth({accessToken: resp.data?.tokens.accessToken, refreshToken: resp.data?.tokens.refreshToken})
     }
   }
 }
