@@ -10,6 +10,9 @@ import {
 } from "react-router-dom";
 import SignUp from './pages/SignUp';
 import NotFound from './pages/NotFound';
+import { authStore } from './stores/authStore';
+
+authStore.initApp()
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

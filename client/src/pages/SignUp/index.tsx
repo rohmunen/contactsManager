@@ -1,5 +1,6 @@
 import { TextInput, Checkbox, Button, Group, Box } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { authStore } from '../../stores/authStore';
 import styles from './styles.module.scss'
 
 const SignUp = () => {
@@ -17,7 +18,7 @@ const SignUp = () => {
   return (
     <div className={ styles.signUp }>
       <Box className={ styles.signUp__form } >
-        <form onSubmit={ form.onSubmit((values) => console.log(values)) }>
+        <form onSubmit={ form.onSubmit((values) => authStore.signUp(values)) }>
           <TextInput
             label="Email"
             placeholder="your@email.com"
