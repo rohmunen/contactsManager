@@ -9,6 +9,7 @@ import {
   Route,
 } from "react-router-dom";
 import SignUp from './pages/SignUp';
+import NotFound from './pages/NotFound';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -20,6 +21,12 @@ root.render(
         <Routes>
           <Route path="/" element={ <Home /> } />
           <Route path="/signup" element={ <SignUp /> } />
+          <Route
+            path="*"
+            element={
+              <NotFound />
+            }
+          />
         </Routes>
       </MainLayout>
     </BrowserRouter>
