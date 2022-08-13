@@ -27,7 +27,7 @@ class AuthStore {
         },
       };
     })
-    AuthAPI.check()
+    this.check()
   }
   //TODO: extend type 'data'
   setAuth = (data: { accessToken: string; refreshToken: string }) => {

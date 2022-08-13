@@ -11,8 +11,8 @@ const HomePage = () => {
     if (authStore.init) {
       navigate('/contacts')
     }
-  }, [])
-  
+  }, [authStore.init])
+
   return (
     <main className={ styles.content }>
       <section className={ styles.content__text }>

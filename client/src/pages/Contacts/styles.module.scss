@@ -1,0 +1,18 @@
+@import 'src/variables';
+
+.contacts {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+  height: 100%;
+  background-color: $color-secondary;
+}
+
+.contacts__button {
+  background-color: $color-primary;
+  color: $color-secondary;
+  &:hover {
+    background-color: $color-primary;
+    color: $color-secondary;
+  }
+}
