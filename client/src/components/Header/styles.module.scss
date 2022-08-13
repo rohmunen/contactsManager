@@ -1,0 +1,24 @@
+@import 'src/variables';
+
+.navbar {
+  background-color: $white-darken;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar__logo {
+  color: $gray-darken;
+  background-color: transparent;
+  &:hover {
+    color: $gray-darken;
+    background-color: transparent;
+  }
+}
+
+.navbar__login {
+  background-color: $button;
+  &:hover{
+    background-color: $button;
+  }
+}
