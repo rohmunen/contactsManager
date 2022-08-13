@@ -1,0 +1,29 @@
+@import 'src/variables';
+
+.signUp {
+  label {
+    color: $white-darken;
+  }
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  height: 100%;
+  background-color: $color-secondary;
+}
+
+.signUp__form {
+  grid-area: 1 / 2 / 2 / 3;
+  padding: 50px;
+  background-color: $color-primary;
+}
+
+.signUp__submit {
+  width: 100%;
+  color: $color-primary;
+  background-color: $color-secondary;
+  &:hover {
+    background-color: $color-secondary;
+  }
+}
