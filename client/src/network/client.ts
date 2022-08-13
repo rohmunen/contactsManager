@@ -8,10 +8,9 @@ class NetClient {
   private onAuthError?: (err: any) => Promise<boolean>;
 
   addRequestInterceptor(
-    onConfig?: (config: AxiosRequestConfig<any>) => AxiosRequestConfig<any> | Promise<AxiosRequestConfig<any>>,
-    onError?: (error: any) => any,
+    onConfig: (config: AxiosRequestConfig) => AxiosRequestConfig | Promise<AxiosRequestConfig>,
   ) {
-    this.axiosInstance.interceptors.request.use(onConfig, onError);
+    this.axiosInstance.interceptors.request.use(onConfig);
     return this;
   }
 

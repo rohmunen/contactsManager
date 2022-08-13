@@ -1,9 +1,18 @@
 import { TextInput, Checkbox, Button, Group, Box } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { observer } from 'mobx-react-lite';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { authStore } from '../../stores/authStore';
 import styles from './styles.module.scss'
 
-const SignUp = () => {
+const SignUp = observer(() => {
+  let navigate = useNavigate();
+  useEffect(() => {
+    if (authStore.init) {
+      navigate('/contacts')
+    }
+  }, [authStore.init])
   const form = useForm({
     initialValues: {
       email: '',
@@ -31,6 +40,7 @@ const SignUp = () => {
           />
           <TextInput
             label="Password"
+            type="password"
             placeholder="password"
             { ...form.getInputProps('password') }
           />
@@ -41,6 +51,6 @@ const SignUp = () => {
       </Box>
     </div>
   )
-}
+})
 
 export default SignUp;

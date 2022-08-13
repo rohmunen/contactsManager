@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import styles from './styles.module.scss'
 import { Button } from '@mantine/core';
 import { useNavigate } from "react-router-dom";
+import { authStore } from '../../stores/authStore';
 
 const HomePage = () => {
   let navigate = useNavigate();
+  useEffect(() => {
+    if (authStore.init) {
+      navigate('/contacts')
+    }
+  }, [])
+  
   return (
     <main className={ styles.content }>
       <section className={ styles.content__text }>

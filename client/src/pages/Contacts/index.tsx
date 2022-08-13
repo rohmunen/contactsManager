@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { ContactsAPI } from '../../api/contacts/routes';
 import { contactsStore } from '../../stores/contactsStore';
 import { observer } from 'mobx-react-lite';
-import Contact from './Contact';
+import ContactCard from './Contact';
 
 const Contacts = observer(() => {
   useEffect(() => {
@@ -17,7 +17,7 @@ const Contacts = observer(() => {
     <main className={ styles.content }>
       {
         contactsStore.contacts.map((contact) =>
-          <Contact contact={ contact } />
+          <ContactCard contact={ contact } />
         )
       }
     </main>

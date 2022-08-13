@@ -15,3 +15,7 @@ export interface ResSignUp {
     nickname: string;
   }
 }
+
+export interface ResCheck {
+  token: string;
+}

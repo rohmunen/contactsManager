@@ -7,7 +7,7 @@ type Props = {
   contact: Contact
 }
 
-const Contact = (props: Props) => {
+const ContactCard = (props: Props) => {
   const { contact } = props
   let navigate = useNavigate();
   return (
@@ -22,4 +22,4 @@ const Contact = (props: Props) => {
   )
 }
 
-export default Contact;
+export default ContactCard;

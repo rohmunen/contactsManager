@@ -11,6 +11,8 @@ import {
 import SignUp from './pages/SignUp';
 import NotFound from './pages/NotFound';
 import { authStore } from './stores/authStore';
+import { ProtectedRoute } from './components/ProtectedRoute';
+import Contacts from './pages/Contacts';
 
 authStore.initApp()
 
@@ -24,6 +26,11 @@ root.render(
         <Routes>
           <Route path="/" element={ <Home /> } />
           <Route path="/signup" element={ <SignUp /> } />
+          <Route path="contacts" element={
+            <ProtectedRoute>
+              <Contacts />
+            </ProtectedRoute>
+          } />
           <Route
             path="*"
             element={
