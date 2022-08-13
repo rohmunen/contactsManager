@@ -23,35 +23,15 @@ class UserController {
     }
   } 
 
-  // async refresh(req, res, next) {
-  //   try {
-  //     const authorizationHeader = req.header('Authorization').split(' ')[1]
-  //     const userData = userService.refresh(authorizationHeader)
-  //     return res.json(userData)
-  //   } catch (e) {
-  //     next(e)
-  //   }
-  // }
-
-  // async getSelf(req, res, next) {
-  //   try {
-  //     const authorizationHeader = req.header('Authorization').split(' ')[1]
-  //     const userData = userService.getUser(authorizationHeader)
-  //     return res.json(userData)
-  //   } catch (e) {
-  //     next(e)
-  //   }
-  // }
-
-  // async update(req, res, next) {
-  //   try {
-  //     const authorizationHeader = req.header('Authorization').split(' ')[1]
-  //     const result = await userService.update(authorizationHeader, req.body)
-  //     return res.json(result)
-  //   } catch (e) {
-  //     next(e)
-  //   }
-  // }
+  async refresh(req: Request, res: Response, next: NextFunction) {
+    try {
+      const authorizationHeader = req.header('Authorization').split(' ')[1]
+      const newToken = await userService.refresh(authorizationHeader)
+      return res.json({token: newToken})
+    } catch (e) {
+      next(e)
+    }
+  }
 }
 
 export default new UserController()

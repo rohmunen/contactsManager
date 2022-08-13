@@ -1,5 +1,8 @@
 import jwt from 'jsonwebtoken'
+import { Token } from '../database/models/token-model'
+import { User } from '../database/models/user-model'
 import { UserDto } from '../dtos/user-dto'
+import { ApiError } from '../utils/api-errors'
 
 class TokensService {
   generateToken(payload: UserDto) {

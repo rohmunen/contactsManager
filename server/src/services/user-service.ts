@@ -24,14 +24,18 @@ class UserService {
     return { token, expire: '1800' }
   }
 
-  // refresh(authorizationHeader: string) {
-  //   const userData = tokenService.validateAccessToken(authorizationHeader)
-  //   if (!userData) {
-  //     throw ApiError.UnauthorizedError()
-  //   }
-  //   const token = tokenService.generateToken({ ...userData })
-  //   return { token, expire: '1800' }
-  // }
+  async refresh(token: string) {
+    if (!token) {
+      throw ApiError.UnauthorizedError();
+    }
+    const userData = tokenService.validateAccessToken(token)
+    if (!userData) {
+      throw ApiError.UnauthorizedError();
+    }
+    const userFromDb = await User.getById(userData.id)
+    const newToken = tokenService.generateToken(userFromDb)
+    return newToken
+  }
 }
 
 export default new UserService()
