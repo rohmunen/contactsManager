@@ -2,6 +2,7 @@ import React from "react"
 import styles from "./styles.module.scss"
 import cn from 'classnames'
 import { Button } from '@mantine/core';
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   className?: string
@@ -9,7 +10,7 @@ type Props = {
 
 export const Header = (props: Props) => {
   const { className } = props
-
+  let navigate = useNavigate();
   return (
     <header
       className={ cn(
@@ -17,7 +18,7 @@ export const Header = (props: Props) => {
         className
       ) }
     >
-      <Button className={styles.navbar__logo}>
+      <Button onClick={ () => { navigate('/') } } className={ styles.navbar__logo }>
         CONTACTS
       </Button>
 
