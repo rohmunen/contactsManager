@@ -35,14 +35,14 @@ const Contacts = observer(() => {
         Add contact
       </Button>
       <Modal title="Создайте контакт!" opened={ opened } onClose={ () => setOpened(false) }>
-        <form onSubmit={ form.onSubmit((values) => { console.log(values) }) }>
+        <form onSubmit={ form.onSubmit((values) => { contactsStore.create(values) }) }>
           <TextInput
             label="Email"
             placeholder="your@email.com"
-            { ...form.getInputProps('email') }
+            { ...form.getInputProps('name') }
           />
           <Input.Wrapper label="Номер телефона">
-            <NumberFormat placeholder='+7 (777)-777-77-77' customInput={ TextInput } format="+7 (###)-###-##-##" />
+            <NumberFormat { ...form.getInputProps('phone') } placeholder='+7 (777)-777-77-77' customInput={ TextInput } format="+7 (###)-###-##-##" />
           </Input.Wrapper>
           <Group position="center" mt="md">
             <Button className={ styles.signUp__submit } type="submit">Создать</Button>
@@ -56,7 +56,7 @@ const Contacts = observer(() => {
           )
         }
       </section>
-    </main>
+    </main >
   )
 })
 

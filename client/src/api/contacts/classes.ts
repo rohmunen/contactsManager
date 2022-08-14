@@ -1,10 +1,8 @@
 export interface Contact {
-  id: string;
-  creator: string;
   name: string;
   phone: string;
 }
 
-export interface ResContacts {
+export interface ResGetContacts {
   contacts: Contact[]
 }
