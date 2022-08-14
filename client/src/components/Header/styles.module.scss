@@ -15,3 +15,14 @@
     background-color: transparent;
   }
 }
+
+.navbar__logout {
+  position: absolute;
+  right: 20px;
+  color: $gray-darken;
+  background-color: transparent;
+  &:hover {
+    color: $gray-darken;
+    background-color: transparent;
+  }
+}

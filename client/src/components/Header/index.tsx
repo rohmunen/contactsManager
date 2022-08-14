@@ -3,6 +3,7 @@ import styles from "./styles.module.scss"
 import cn from 'classnames'
 import { Button } from '@mantine/core';
 import { useNavigate } from "react-router-dom";
+import { authStore } from "../../stores/authStore";
 
 type Props = {
   className?: string
@@ -18,9 +19,12 @@ export const Header = (props: Props) => {
         className
       ) }
     >
-      <Button onClick={ () => { navigate('/') } } className={ styles.navbar__logo }>
+      <Button onClick={ () => { authStore.init ? navigate('/contacts') : navigate('/') } } className={ styles.navbar__logo }>
         CONTACTS
       </Button>
+      { authStore.init && <Button onClick={ () => authStore.logout() } className={ styles.navbar__logout }>
+        Выйти
+      </Button> }
 
     </header>
   )

@@ -30,6 +30,7 @@ class AuthStore {
     })
     API.setOnAuthError(async () => {
       const resp = await AuthAPI.refresh();
+      console.log(resp)
       if (resp.isSuccess) {
         if (resp.data) {
           this.setAuth(resp.data.tokens);
@@ -79,6 +80,11 @@ class AuthStore {
       this.setInit(false)
     }
     this.setLoading(false)
+  }
+
+  logout = () => {
+    this.setInit(false)
+    localStorage.clear()
   }
 }
 
