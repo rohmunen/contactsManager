@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import styles from './styles.module.scss'
-import { Button, Group, Input, Modal, TextInput } from '@mantine/core';
+import { Button, Group, Input, Modal, Pagination, TextInput } from '@mantine/core';
 import { useNavigate } from "react-router-dom";
-import { ContactsAPI } from '../../api/contacts/routes';
 import { contactsStore } from '../../stores/contactsStore';
 import { observer } from 'mobx-react-lite';
 import ContactCard from './Contact';
 import { useForm } from '@mantine/form';
-import InputMask from 'react-input-mask';
 import NumberFormat from 'react-number-format';
 import { useId } from '@mantine/hooks';
 
 const Contacts = observer(() => {
+  const [ activePage, setPage ] = useState(1);
   const id = useId();
   const inputRef = React.createRef();
   useEffect(() => {
@@ -34,6 +33,11 @@ const Contacts = observer(() => {
       <Button onClick={ () => { setOpened(true) } } className={ styles.contacts__button } radius="xs" size="md">
         Add contact
       </Button>
+      <TextInput
+        label="Search for a contact"
+        placeholder="contact name"
+        onChange={ (e) => { contactsStore.setPage(1); contactsStore.setFilter(e.target.value) } }
+      />
       <Modal title="Создайте контакт!" opened={ opened } onClose={ () => setOpened(false) }>
         <form onSubmit={ form.onSubmit((values) => { contactsStore.create(values) }) }>
           <TextInput
@@ -51,11 +55,12 @@ const Contacts = observer(() => {
       </Modal>
       <section className={ styles.contacts__cards }>
         {
-          contactsStore.contacts.map((contact) =>
+          contactsStore.pagedContacts.map((contact) =>
             <ContactCard contact={ contact } />
           )
         }
       </section>
+      <Pagination page={ contactsStore.page } onChange={ (e) => contactsStore.setPage(e) } total={ Math.floor(contactsStore.filterContacts.length / 9) + 1 } />
     </main >
   )
 })

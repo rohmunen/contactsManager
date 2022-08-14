@@ -7,6 +7,8 @@ import { ContactsAPI } from '../api/contacts/routes';
 
 class ContactsStore {
   contacts: Contact[] = [];
+  filter: string = '';
+  page: number = 1;
 
   constructor() {
     makeAutoObservable(this);
@@ -14,6 +16,25 @@ class ContactsStore {
 
   setContacts = (contacts: Contact[]) => {
     this.contacts = contacts
+  }
+
+  get filterContacts() {
+    let filteredContacts = this.contacts.filter(contact => contact.name.includes(this.filter))
+    return filteredContacts
+  };
+
+  get pagedContacts() {
+    let start = (this.page - 1) * 9
+    let finish = this.page * 9
+    return this.filterContacts.slice(start, finish)
+  }
+
+  setFilter = (value: string) => {
+    this.filter = value
+  }
+
+  setPage = (value: number) => {
+    this.page = value
   }
 
   addContact = (contact: Contact) => {

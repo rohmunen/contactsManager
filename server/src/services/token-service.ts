@@ -7,7 +7,7 @@ import { ApiError } from '../utils/api-errors'
 class TokensService {
   generateToken(payload: UserDto) {
     console.log('payload', payload)
-    const accessToken = jwt.sign(payload, process.env.ACCESS_SECRET, { expiresIn: '30m' })
+    const accessToken = jwt.sign(payload, process.env.ACCESS_SECRET, { expiresIn: '1m' })
     const refreshToken = jwt.sign(payload, process.env.ACCESS_SECRET, { expiresIn: '1800m' })
     return { accessToken, refreshToken }
   }
@@ -18,7 +18,7 @@ class TokensService {
       const { exp, iat, ...rest } = data
       return rest as UserDto
     } catch (error) {
-      return null
+      throw ApiError.UnauthorizedError()
     }
   }
 

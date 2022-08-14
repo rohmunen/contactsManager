@@ -30,8 +30,20 @@ class UserController {
       const authorizationHeader = req.header('refresh-token')
       const userData = tokenService.validateAccessToken(authorizationHeader)
       await tokenService.checkToken(userData.id)
-      const newTokens = tokenService.generateToken(userData)
-      return res.json({ newTokens })
+      const tokens = tokenService.generateToken(userData)
+      return res.json({ tokens })
+    } catch (e) {
+      next(e)
+    }
+  }
+
+  async check(req: Request, res: Response, next: NextFunction) {
+    try {
+      const authorizationHeader = req.header('access-token')
+      const userData = tokenService.validateAccessToken(authorizationHeader)
+      if (userData) {
+        return res.json({token: authorizationHeader})
+      }
     } catch (e) {
       next(e)
     }

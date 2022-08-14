@@ -1,9 +1,10 @@
 import { API } from '../../network/client';
-import { ReqSignUp, ResCheck, ResSignUp } from './classes';
+import { ReqSignUp, ResCheck, ResRefresh, ResSignUp } from './classes';
 
 const PATHS = {
   SIGNUP: '/signup',
-  CHECK: '/check'
+  CHECK: '/check',
+  REFRESH: '/refresh'
 }
 
 export const AuthAPI = {
@@ -16,6 +17,11 @@ export const AuthAPI = {
   check: async () => {
     return API.get<ResCheck>({
       url: PATHS.CHECK,
+    })
+  },
+  refresh: async () => {
+    return API.get<ResRefresh>({
+      url: PATHS.REFRESH
     })
   }
 }

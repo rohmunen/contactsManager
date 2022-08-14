@@ -3,7 +3,10 @@ import { ApiError } from '../utils/api-errors'
 
 class ContactsService {
   async create (contact: Contact) {
-      const contactData = Contact.create(contact) 
+      const contactData = Contact.create(contact)
+      if (!contactData) {
+        throw ApiError.BadRequest('Ошибка при создании контакта')
+      }
       return contactData
   }
 

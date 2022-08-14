@@ -15,6 +15,12 @@ export interface ResSignUp {
     nickname: string;
   }
 }
+export interface ResRefresh {
+  tokens: {
+    accessToken: string;
+    refreshToken: string;
+  }
+}
 
 export interface ResCheck {
   token: string;

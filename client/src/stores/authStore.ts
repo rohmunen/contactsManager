@@ -28,6 +28,16 @@ class AuthStore {
         },
       };
     })
+    API.setOnAuthError(async (error: any) => {
+      const resp = await AuthAPI.refresh();
+      if (resp.isSuccess) {
+        if (resp.data) {
+          this.setAuth(resp.data.tokens);
+        }
+        return true;
+      }
+      return false;
+    });
     this.check()
   }
   //TODO: extend type 'data'
