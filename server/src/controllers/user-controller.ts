@@ -28,7 +28,8 @@ class UserController {
   async refresh(req: Request, res: Response, next: NextFunction) {
     try {
       const authorizationHeader = req.header('refresh-token')
-      const userData = tokenService.validateAccessToken(authorizationHeader)
+      const userData = tokenService.validateRefreshToken(authorizationHeader)
+      await tokenService.checkToken(userData.id)
       const tokens = tokenService.generateToken(userData)
       return res.json({ tokens })
     } catch (e) {

@@ -20,6 +20,16 @@ class TokensService {
     }
   }
 
+  validateRefreshToken(token: string): UserDto {
+    try {
+      const data = jwt.verify(token, process.env.ACCESS_SECRET) as jwt.JwtPayload
+      const { exp, iat, ...rest } = data
+      return rest as UserDto
+    } catch (error) {
+      throw ApiError.BadRequest('bad refresh token')
+    }
+  }
+
   async writeTokenToDb(owner: string, token: string) {
     try {
       await Token.delete(owner)
@@ -33,7 +43,7 @@ class TokensService {
   async checkToken(owner: string) {
     const result = await Token.get(owner)
     if (!result) {
-      throw ApiError.BadRequest('Неправильный refresh token')
+      throw ApiError.BadRequest('bad refresh token')
     }
     return result
   }
