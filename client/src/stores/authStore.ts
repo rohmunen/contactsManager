@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 class AuthStore {
   init: boolean = false;
+  loading: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -41,6 +42,10 @@ class AuthStore {
     this.init = value
   }
 
+  setLoading = (value: boolean) => {
+    this.loading = value
+  }
+
   signUp = async (data: { email: string, nickname: string, password: string }) => {
     const resp = await AuthAPI.singup(data)
     if (resp.data) {
@@ -50,12 +55,14 @@ class AuthStore {
   }
 
   check = async () => {
+    this.setLoading(true)
     const resp = await AuthAPI.check()
     if (resp.data) {
       this.setInit(true)
     } else {
       this.setInit(false)
     }
+    this.setLoading(false)
   }
 }
 
