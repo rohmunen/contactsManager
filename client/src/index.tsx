@@ -13,6 +13,7 @@ import NotFound from './pages/NotFound';
 import { authStore } from './stores/authStore';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import Contacts from './pages/Contacts';
+import { NotificationsProvider } from '@mantine/notifications';
 
 authStore.initApp()
 
@@ -22,23 +23,25 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <MainLayout>
-        <Routes>
-          <Route path="/" element={ <Home /> } />
-          <Route path="/signup" element={ <Auth /> } />
-          <Route path="contacts" element={
-            <ProtectedRoute>
-              <Contacts />
-            </ProtectedRoute>
-          } />
-          <Route
-            path="*"
-            element={
-              <NotFound />
-            }
-          />
-        </Routes>
-      </MainLayout>
+      <NotificationsProvider>
+        <MainLayout>
+          <Routes>
+            <Route path="/" element={ <Home /> } />
+            <Route path="/signup" element={ <Auth /> } />
+            <Route path="contacts" element={
+              <ProtectedRoute>
+                <Contacts />
+              </ProtectedRoute>
+            } />
+            <Route
+              path="*"
+              element={
+                <NotFound />
+              }
+            />
+          </Routes>
+        </MainLayout>
+      </NotificationsProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
