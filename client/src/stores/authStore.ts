@@ -28,7 +28,7 @@ class AuthStore {
         },
       };
     })
-    API.setOnAuthError(async (error: any) => {
+    API.setOnAuthError(async () => {
       const resp = await AuthAPI.refresh();
       if (resp.isSuccess) {
         if (resp.data) {
