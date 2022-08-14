@@ -5,7 +5,7 @@ import { authMiddleware } from "./middlewares/auth-middleware";
 const router = Router()
 
 router.post('/signup', userController.signup)
-router.post('/login', userController.login)
+router.post('/signin', userController.login)
 router.post('/contacts', authMiddleware, contactsController.create)
 router.get('/contacts', authMiddleware, contactsController.get)
 router.get('/check', userController.check)
