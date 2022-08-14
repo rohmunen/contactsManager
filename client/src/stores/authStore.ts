@@ -34,11 +34,11 @@ class AuthStore {
     console.log('DEV: SetUserTokens', JSON.stringify(data));
     localStorage.setItem('accessToken', data.accessToken)
     localStorage.setItem('refreshToken', data.refreshToken)
-    this.setInit()
+    this.setInit(true)
   };
 
-  setInit = () => {
-    this.init = true
+  setInit = (value: boolean) => {
+    this.init = value
   }
 
   signUp = async (data: { email: string, nickname: string, password: string }) => {
@@ -52,7 +52,9 @@ class AuthStore {
   check = async () => {
     const resp = await AuthAPI.check()
     if (resp.data) {
-      this.setInit()
+      this.setInit(true)
+    } else {
+      this.setInit(false)
     }
   }
 }
