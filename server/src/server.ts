@@ -3,6 +3,7 @@ import cors from 'cors'
 import router from './router'
 import { connectDB } from './database/client'
 import { migrateUp } from './database/migrations/migrate-up'
+import { errorMiddleware } from './middlewares/error-middleware'
 
 export default class Server {
   private server: express.Application;
@@ -28,7 +29,7 @@ export default class Server {
   }
 
   initErrorHandling() {
-    //this.server.use(errorMiddleware)
+    this.server.use(errorMiddleware)
   }
 
   initRouter() {

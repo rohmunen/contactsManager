@@ -3,8 +3,7 @@ export interface ReqSignUp {
   nickname: string;
   password: string;
 }
-
-export interface ResSignUp {
+export interface ResAuth {
   tokens: {
     accessToken: string;
     refreshToken: string;
@@ -14,6 +13,10 @@ export interface ResSignUp {
     id: string;
     nickname: string;
   }
+}
+export interface ReqSignIn {
+  email: string;
+  password: string;
 }
 export interface ResRefresh {
   tokens: {

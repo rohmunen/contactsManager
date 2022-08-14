@@ -29,7 +29,6 @@ class UserController {
     try {
       const authorizationHeader = req.header('refresh-token')
       const userData = tokenService.validateAccessToken(authorizationHeader)
-      await tokenService.checkToken(userData.id)
       const tokens = tokenService.generateToken(userData)
       return res.json({ tokens })
     } catch (e) {
@@ -42,7 +41,7 @@ class UserController {
       const authorizationHeader = req.header('access-token')
       const userData = tokenService.validateAccessToken(authorizationHeader)
       if (userData) {
-        return res.json({token: authorizationHeader})
+        return res.json({ token: authorizationHeader })
       }
     } catch (e) {
       next(e)

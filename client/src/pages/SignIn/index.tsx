@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { authStore } from '../../stores/authStore';
 import styles from './styles.module.scss'
 
-const SignUp = observer(() => {
+const SignIn = observer(() => {
   let navigate = useNavigate();
   useEffect(() => {
     if (authStore.init) {
@@ -16,27 +16,20 @@ const SignUp = observer(() => {
   const form = useForm({
     initialValues: {
       email: '',
-      nickname: '',
       password: '',
     },
-
     validate: {
       email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
     },
   });
   return (
-    <div className={ styles.signUp }>
-      <Box className={ styles.signUp__form } >
-        <form onSubmit={ form.onSubmit((values) => authStore.signUp(values)) }>
+    <div className={ styles.signIn }>
+      <Box className={ styles.signIn__form } >
+        <form onSubmit={ form.onSubmit((values) => authStore.signIn(values)) }>
           <TextInput
             label="Email"
             placeholder="your@email.com"
             { ...form.getInputProps('email') }
-          />
-          <TextInput
-            label="Username"
-            placeholder="your nickname"
-            { ...form.getInputProps('nickname') }
           />
           <TextInput
             label="Password"
@@ -45,7 +38,7 @@ const SignUp = observer(() => {
             { ...form.getInputProps('password') }
           />
           <Group position="center" mt="md">
-            <Button className={ styles.signUp__submit } type="submit">Submit</Button>
+            <Button className={ styles.signIn__submit } type="submit">Submit</Button>
           </Group>
         </form>
       </Box>
@@ -53,4 +46,4 @@ const SignUp = observer(() => {
   )
 })
 
-export default SignUp;
+export default SignIn;

@@ -1,0 +1,42 @@
+import { TextInput, Button, Group } from '@mantine/core';
+import { useForm } from '@mantine/form';
+import styles from '../styles.module.scss'
+import { authStore } from '../../../stores/authStore';
+
+const SignUpForm = () => {
+  const form = useForm({
+    initialValues: {
+      email: '',
+      nickname: '',
+      password: '',
+    },
+    validate: {
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+    },
+  });
+  return (
+    <form onSubmit={ form.onSubmit((values) => authStore.signUp(values)) }>
+      <TextInput
+        label="Email"
+        placeholder="your@email.com"
+        { ...form.getInputProps('email') }
+      />
+      <TextInput
+        label="Username"
+        placeholder="your nickname"
+        { ...form.getInputProps('nickname') }
+      />
+      <TextInput
+        label="Password"
+        type="password"
+        placeholder="password"
+        { ...form.getInputProps('password') }
+      />
+      <Group position="center" mt="md">
+        <Button className={ styles.signUp__submit } type="submit">Зарегистрироваться</Button>
+      </Group>
+    </form>
+  )
+}
+
+export default SignUpForm;

@@ -8,7 +8,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import SignUp from './pages/SignUp';
+import Auth from './pages/Auth';
 import NotFound from './pages/NotFound';
 import { authStore } from './stores/authStore';
 import { ProtectedRoute } from './components/ProtectedRoute';
@@ -25,7 +25,7 @@ root.render(
       <MainLayout>
         <Routes>
           <Route path="/" element={ <Home /> } />
-          <Route path="/signup" element={ <SignUp /> } />
+          <Route path="/signup" element={ <Auth /> } />
           <Route path="contacts" element={
             <ProtectedRoute>
               <Contacts />

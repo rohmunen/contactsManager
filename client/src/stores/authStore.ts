@@ -33,8 +33,8 @@ class AuthStore {
       if (resp.isSuccess) {
         if (resp.data) {
           this.setAuth(resp.data.tokens);
+          return true;
         }
-        return true;
       }
       return false;
     });
@@ -60,7 +60,13 @@ class AuthStore {
     const resp = await AuthAPI.singup(data)
     if (resp.data) {
       this.setAuth({ accessToken: resp.data?.tokens.accessToken, refreshToken: resp.data?.tokens.refreshToken })
-      console.log(this.init)
+    }
+  }
+
+  signIn = async (data: {email: string, password: string}) => {
+    const resp = await AuthAPI.signin(data)
+    if (resp.data) {
+      this.setAuth({ accessToken: resp.data?.tokens.accessToken, refreshToken: resp.data?.tokens.refreshToken })
     }
   }
 

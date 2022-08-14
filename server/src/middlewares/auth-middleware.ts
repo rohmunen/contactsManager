@@ -1,5 +1,5 @@
-import { ApiError } from '../utils/api-errors.js'
-import tokenService from "../services/token-service.js";
+import { ApiError } from '../utils/api-errors'
+import tokenService from "../services/token-service";
 import { Request, Response, NextFunction } from 'express';
 
 export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {

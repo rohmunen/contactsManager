@@ -101,7 +101,6 @@ class NetClient {
         const isSuccess = await this.onAuthError(error)
           .then((val) => val)
           .catch((_) => false);
-
         if (isSuccess) {
           return await this.makeRequest(request);
         }

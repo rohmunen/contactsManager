@@ -1,12 +1,10 @@
 import jwt from 'jsonwebtoken'
 import { Token } from '../database/models/token-model'
-import { User } from '../database/models/user-model'
 import { UserDto } from '../dtos/user-dto'
 import { ApiError } from '../utils/api-errors'
 
 class TokensService {
   generateToken(payload: UserDto) {
-    console.log('payload', payload)
     const accessToken = jwt.sign(payload, process.env.ACCESS_SECRET, { expiresIn: '1m' })
     const refreshToken = jwt.sign(payload, process.env.ACCESS_SECRET, { expiresIn: '1800m' })
     return { accessToken, refreshToken }
@@ -35,7 +33,7 @@ class TokensService {
   async checkToken(owner: string) {
     const result = await Token.get(owner)
     if (!result) {
-      throw ApiError.UnauthorizedError()
+      throw ApiError.BadRequest('Неправильный refresh token')
     }
     return result
   }
