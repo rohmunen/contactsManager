@@ -1,0 +1,26 @@
+@import 'src/variables';
+
+.card {
+  position: relative;
+}
+.card__close {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.card__edit {
+  background-color: transparent;
+  color: $color-primary;
+  background-color: $color-secondary;
+  position: absolute;
+  top: 0px;
+  right: 30px;
+  padding: 0;
+  font-size: 0.6em;
+  width: 28px;
+  height: 28px;
+  &:hover {
+    color: $color-primary;
+    background-color: $color-secondary;
+  }
+}

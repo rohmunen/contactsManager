@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import styles from './styles.module.scss'
 import { Button, Group, Input, Modal, Pagination, TextInput } from '@mantine/core';
 import { useNavigate } from "react-router-dom";
@@ -8,12 +7,8 @@ import { observer } from 'mobx-react-lite';
 import ContactCard from './Contact';
 import { useForm } from '@mantine/form';
 import NumberFormat from 'react-number-format';
-import { useId } from '@mantine/hooks';
 
 const Contacts = observer(() => {
-  const [ activePage, setPage ] = useState(1);
-  const id = useId();
-  const inputRef = React.createRef();
   useEffect(() => {
     contactsStore.getContacts()
   }, [])
@@ -56,7 +51,7 @@ const Contacts = observer(() => {
       <section className={ styles.contacts__cards }>
         {
           contactsStore.pagedContacts.map((contact) =>
-            <ContactCard contact={ contact } />
+            <ContactCard key={contact.id} contact={ contact } />
           )
         }
       </section>

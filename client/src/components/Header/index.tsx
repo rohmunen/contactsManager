@@ -4,12 +4,13 @@ import cn from 'classnames'
 import { Button } from '@mantine/core';
 import { useNavigate } from "react-router-dom";
 import { authStore } from "../../stores/authStore";
+import { observer } from "mobx-react-lite";
 
 type Props = {
   className?: string
 }
 
-export const Header = (props: Props) => {
+export const Header = observer((props: Props) => {
   const { className } = props
   let navigate = useNavigate();
   return (
@@ -28,5 +29,5 @@ export const Header = (props: Props) => {
 
     </header>
   )
-}
+})
 

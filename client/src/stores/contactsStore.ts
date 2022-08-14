@@ -1,12 +1,9 @@
-import { AuthAPI } from '../api/auth/routes';
-import { AxiosRequestConfig } from 'axios';
 import { makeAutoObservable } from 'mobx';
-import { API } from '../network/client';
-import { Contact } from '../api/contacts/classes';
+import { ReqContact, ResContact } from '../api/contacts/classes';
 import { ContactsAPI } from '../api/contacts/routes';
 
 class ContactsStore {
-  contacts: Contact[] = [];
+  contacts: ResContact[] = [];
   filter: string = '';
   page: number = 1;
 
@@ -14,7 +11,7 @@ class ContactsStore {
     makeAutoObservable(this);
   }
 
-  setContacts = (contacts: Contact[]) => {
+  setContacts = (contacts: ResContact[]) => {
     this.contacts = contacts
   }
 
@@ -37,7 +34,7 @@ class ContactsStore {
     this.page = value
   }
 
-  addContact = (contact: Contact) => {
+  addContact = (contact: ResContact) => {
     this.contacts.push(contact)
   }
 
@@ -48,10 +45,23 @@ class ContactsStore {
     }
   }
 
-  create = async (data: Contact) => {
+  create = async (data: ReqContact) => {
     const resp = await ContactsAPI.create(data)
     if (resp.data) {
-      this.addContact(data)
+      this.addContact(resp.data)
+    }
+  }
+
+  removeContact = (id: number) => {
+    console.log(this.contacts)
+    console.log(this.contacts.filter(contact => contact.id !== id))
+    this.contacts = this.contacts.filter(contact => contact.id !== id)
+  }
+
+  delete = async (id: number) => {
+    const resp = await ContactsAPI.delete(id)
+    if (resp.data) {
+      this.removeContact(id)
     }
   }
 }

@@ -1,5 +1,5 @@
 import { API } from '../../network/client';
-import { Contact, ResGetContacts } from './classes';
+import { ResContact, ReqContact, ResGetContacts, ResDeleteContact } from './classes';
 
 const PATHS = {
   CONTACTS: '/contacts',
@@ -13,10 +13,16 @@ export const ContactsAPI = {
     })
   },
 
-  create: async (data: Contact) => {
-    return API.post<Contact>({
+  create: async (data: ReqContact) => {
+    return API.post<ResContact>({
       url: PATHS.CONTACTS,
       data
+    })
+  },
+
+  delete: async (id: number) => {
+    return API.delete<ResDeleteContact>({
+      url: PATHS.CONTACTS + `/${id}`,
     })
   }
 

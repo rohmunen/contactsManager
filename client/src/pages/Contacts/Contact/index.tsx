@@ -1,17 +1,18 @@
 import styles from './styles.module.scss'
-import { useNavigate } from "react-router-dom";
-import { Contact } from '../../../api/contacts/classes';
-import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
+import { ResContact } from '../../../api/contacts/classes';
+import { Card, Text, Group, CloseButton, Button } from '@mantine/core';
+import { contactsStore } from '../../../stores/contactsStore';
 
 type Props = {
-  contact: Contact
+  contact: ResContact
 }
 
 const ContactCard = (props: Props) => {
   const { contact } = props
-  let navigate = useNavigate();
   return (
-    <Card shadow="sm" p="lg" radius="md" withBorder>
+    <Card className={ styles.card } shadow="sm" p="lg" radius="md" withBorder>
+      <Button className={ styles.card__edit }>Edit</Button>
+      <CloseButton onClick={() => {contactsStore.delete(contact.id)}} className={ styles.card__close } />
       <Group position="apart" mt="md" mb="xs">
         <Text weight={ 500 }>{ contact.name }</Text>
       </Group>
