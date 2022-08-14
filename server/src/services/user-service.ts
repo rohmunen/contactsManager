@@ -14,10 +14,11 @@ class UserService {
   }
 
   async login(email: string, password: string) {
+    console.log(email, password)
     const user = await User.getByEmail(email)
     const hashEqual = await bcrypt.compare(password, user.password)
     if (!hashEqual) {
-      throw ApiError.UnauthorizedError()
+      throw ApiError.BadRequest('wrong email || password')
     }
     const userDto = new UserDto(user)
     const tokens = tokenService.generateToken({ ...userDto })
