@@ -23,22 +23,22 @@ const ContactModal = observer((props: Props) => {
 
     validate: {
       name: (value) => (value.length > 0 ? null : 'Слишком короткое имя'),
-      phone: (value) => (value.length === 18 ? null : 'Заполните телефон'),
+      phone: (value) => (value.length === 18 && value.indexOf(' ') === -1 ? null : 'Заполните телефон'),
     },
   });
   return (
-    <Modal title={ contact ? "Изменить контакт" : "Создайте контакт!" } opened={ opened } onClose={ () => setOpened(false) }>
+    <Modal title={ contact ? "Изменить контакт" : "Создайте контакт!" } opened={ opened } onClose={ () => { setOpened(false); form.setValues({ name: contact?.name || '', phone: contact?.phone || '' }) } }>
       <form onSubmit={ contact ? form.onSubmit((values) => { console.log({ ...contact, ...values }); contactsStore.update({ ...contact, ...values }) }) : form.onSubmit((values) => { contactsStore.create(values) }) }>
         <TextInput
           label="Имя"
           placeholder="John K."
           { ...form.getInputProps('name') }
         />
-        <Input.Wrapper label="Номер телефона">
-          <NumberFormat { ...form.getInputProps('phone') } placeholder='+7 (777)-777-77-77' customInput={ TextInput } format="+7 (###)-###-##-##" />
+        <Input.Wrapper label="Номер телефона" onChange={ (e) => { console.log(form.values.phone) } }>
+          <NumberFormat { ...form.getInputProps('phone') } placeholder='+7-(777)-777-77-77' customInput={ TextInput } format="+7-(###)-###-##-##" />
         </Input.Wrapper>
         <Group position="center" mt="md">
-          <PrimaryButton onClick={ () => { setOpened(false) } } text={ contact ? 'Сохранить' : 'Создать' } type="submit" />
+          <PrimaryButton text={ contact ? 'Сохранить' : 'Создать' } type="submit" />
         </Group>
       </form>
     </Modal>
