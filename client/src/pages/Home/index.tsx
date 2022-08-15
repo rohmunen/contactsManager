@@ -3,7 +3,7 @@ import styles from './styles.module.scss'
 import { Button } from '@mantine/core';
 import { useNavigate } from "react-router-dom";
 import { authStore } from '../../stores/authStore';
-import Auth from '../Auth';
+import Auth from '../../components/Auth';
 
 const HomePage = () => {
   let navigate = useNavigate();

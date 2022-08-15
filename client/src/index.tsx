@@ -8,7 +8,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import Auth from './pages/Auth';
+import Auth from './components/Auth';
 import NotFound from './pages/NotFound';
 import { authStore } from './stores/authStore';
 import { ProtectedRoute } from './components/ProtectedRoute';
