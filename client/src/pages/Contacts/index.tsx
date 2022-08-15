@@ -14,18 +14,18 @@ const Contacts = observer(() => {
   return (
     <main className={ styles.contacts }>
       <Button onClick={ () => { setOpened(true) } } className={ styles.contacts__button } radius="xs" size="md">
-        Add contact
+        Добавить контакт
       </Button>
-      <ContactModal opened={opened} setOpened={setOpened} />
+      <ContactModal opened={ opened } setOpened={ setOpened } />
       <TextInput
-        label="Search for a contact"
-        placeholder="contact name"
+        label="Найти контакт"
+        placeholder="Имя"
         onChange={ (e) => { contactsStore.setPage(1); contactsStore.setFilter(e.target.value) } }
       />
       <section className={ styles.contacts__cards }>
         {
           contactsStore.pagedContacts.map((contact) =>
-            <ContactCard key={contact.id} contact={ contact } />
+            <ContactCard key={ contact.id } contact={ contact } />
           )
         }
       </section>
