@@ -4,7 +4,7 @@ import { API } from '../network/client';
 import { AxiosRequestConfig } from 'axios';
 import { useNavigate } from "react-router-dom";
 import { showNotification } from '@mantine/notifications';
-import { ReqSignUp } from '../api/auth/classes';
+import { ReqSignIn, ReqSignUp } from '../api/auth/classes';
 
 class AuthStore {
   init: boolean = false;
@@ -68,7 +68,7 @@ class AuthStore {
     }
   }
 
-  signIn = async (data: { email: string, password: string }) => {
+  signIn = async (data: ReqSignIn) => {
     const resp = await AuthAPI.signin(data)
     if (resp.data) {
       this.setAuth({ accessToken: resp.data?.tokens.accessToken, refreshToken: resp.data?.tokens.refreshToken })
