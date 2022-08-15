@@ -29,7 +29,7 @@ const Contacts = observer(() => {
           )
         }
       </section>
-      <Pagination page={ contactsStore.page } onChange={ (e) => contactsStore.setPage(e) } total={ Math.floor(contactsStore.filterContacts.length / 9) + 1 } />
+      <Pagination className={ styles.contacts__pagination } page={ contactsStore.page } onChange={ (e) => contactsStore.setPage(e) } total={ Math.floor(contactsStore.filterContacts.length / 9) + 1 } />
     </main >
   )
 })

@@ -26,3 +26,11 @@
     color: $color-secondary;
   }
 }
+
+.contacts__pagination {
+  margin-top: 15px;
+  [data-active] {
+    color: $color-secondary;
+    background-color: $color-primary;
+  }
+}
