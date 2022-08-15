@@ -37,7 +37,7 @@ const ContactModal = observer((props: Props) => {
           <NumberFormat { ...form.getInputProps('phone') } placeholder='+7 (777)-777-77-77' customInput={ TextInput } format="+7 (###)-###-##-##" />
         </Input.Wrapper>
         <Group position="center" mt="md">
-          <Button className={ styles.signUp__submit } type="submit">Создать</Button>
+          <Button className={ styles.modal__submit } type="submit">{contact ? 'Сохранить' : 'Создать'}</Button>
         </Group>
       </form>
     </Modal>
