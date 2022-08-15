@@ -17,7 +17,7 @@ const HomePage = () => {
     <main className={ styles.content }>
       <section className={ styles.content__text }>
         <h1 className={ styles.content__heading }> Contacts manager </h1>
-        <h2 className={ styles.content__description }>после авторизации вам станет доступна возможность добавлять свои контанты и управлять ими!</h2>
+        <h2 className={ styles.content__description }>после авторизации вам станет доступна возможность добавлять свои контакты и управлять ими!</h2>
       </section>
       <section className={ styles.content__picture }>
         <Auth />
