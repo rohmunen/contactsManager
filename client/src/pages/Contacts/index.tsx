@@ -1,28 +1,16 @@
 import { useEffect, useState } from 'react';
 import styles from './styles.module.scss'
 import { Button, Pagination, TextInput } from '@mantine/core';
-import { useNavigate } from "react-router-dom";
 import { contactsStore } from '../../stores/contactsStore';
 import { observer } from 'mobx-react-lite';
 import ContactCard from './Contact';
-import { useForm } from '@mantine/form';
 import ContactModal from './ContactModal';
 
 const Contacts = observer(() => {
   useEffect(() => {
     contactsStore.getContacts()
   }, [])
-  let navigate = useNavigate();
   const [ opened, setOpened ] = useState(false);
-  const form = useForm({
-    initialValues: {
-      name: '',
-      phone: ''
-    },
-
-    validate: {
-    },
-  });
   return (
     <main className={ styles.contacts }>
       <Button onClick={ () => { setOpened(true) } } className={ styles.contacts__button } radius="xs" size="md">
