@@ -1,5 +1,4 @@
-import { TextInput, Checkbox, Button, Group, Box, SegmentedControl } from '@mantine/core';
-import { useForm } from '@mantine/form';
+import { Box, SegmentedControl } from '@mantine/core';
 import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -16,17 +15,6 @@ const Auth = observer(() => {
       navigate('/contacts')
     }
   }, [ authStore.init ])
-  const form = useForm({
-    initialValues: {
-      email: '',
-      nickname: '',
-      password: '',
-    },
-
-    validate: {
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-    },
-  });
   return (
     <div className={ styles.signUp }>
       <Box className={ styles.signUp__form } >

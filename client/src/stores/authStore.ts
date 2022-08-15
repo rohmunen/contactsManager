@@ -2,7 +2,6 @@ import { AuthAPI } from '../api/auth/routes';
 import { makeAutoObservable } from 'mobx';
 import { API } from '../network/client';
 import { AxiosRequestConfig } from 'axios';
-import { useNavigate } from "react-router-dom";
 import { showNotification } from '@mantine/notifications';
 import { ReqSignIn, ReqSignUp } from '../api/auth/classes';
 

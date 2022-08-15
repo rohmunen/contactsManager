@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { ReqContact, ResContact, ResGetContacts } from '../api/contacts/classes';
+import { ReqContact, ResContact } from '../api/contacts/classes';
 import { ContactsAPI } from '../api/contacts/routes';
 
 class ContactsStore {

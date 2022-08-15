@@ -1,4 +1,3 @@
-import React from "react"
 import styles from "./styles.module.scss"
 import cn from 'classnames'
 import { Button } from '@mantine/core';

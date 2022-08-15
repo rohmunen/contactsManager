@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import styles from './styles.module.scss'
-import { Button, Group, Input, Modal, Pagination, TextInput } from '@mantine/core';
+import { Button, Pagination, TextInput } from '@mantine/core';
 import { useNavigate } from "react-router-dom";
 import { contactsStore } from '../../stores/contactsStore';
 import { observer } from 'mobx-react-lite';
 import ContactCard from './Contact';
 import { useForm } from '@mantine/form';
-import NumberFormat from 'react-number-format';
 import ContactModal from './ContactModal';
 
 const Contacts = observer(() => {
