@@ -1,7 +1,7 @@
 import { User } from "../database/models/user-model"
 import { UserDto } from '../dtos/user-dto'
 import tokenService from "./token-service"
-import bcrypt from "bcrypt"
+import bcryptjs from "bcryptjs"
 import { ApiError } from "../utils/api-errors"
 
 class UserService {
@@ -16,7 +16,7 @@ class UserService {
   async login(email: string, password: string) {
     console.log(email, password)
     const user = await User.getByEmail(email)
-    const hashEqual = await bcrypt.compare(password, user.password)
+    const hashEqual = await bcryptjs.compare(password, user.password)
     if (!hashEqual) {
       throw ApiError.BadRequest('wrong email || password')
     }

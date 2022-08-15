@@ -1,5 +1,5 @@
 import { pool } from "../client"
-import bcrypt from "bcrypt"
+import bcryptjs from "bcryptjs"
 import { v4 as uuidv4 } from 'uuid';
 import { ApiError } from "../../utils/api-errors";
 
@@ -18,7 +18,7 @@ export class User {
 
   static async beforeCreate(user: User) {
     const id = uuidv4();
-    const hashPassword = await bcrypt.hash(user.password, 3)
+    const hashPassword = await bcryptjs.hash(user.password, 3)
     const dbUser = await this.getByEmail(user.email)
     if (dbUser) {
       throw ApiError.BadRequest('Email taken')
