@@ -7,8 +7,6 @@ const createDbIfNotExists = async () => {
 
   const client = new pg.Pool(pgConfig)
 
-  console.log(process.env.DB_PORT)
-
   const dbs = await client.query('SELECT datname FROM pg_database;')
 
   if (dbs.rows.findIndex(db => db.datname === dbName.toLowerCase()) === -1) {
