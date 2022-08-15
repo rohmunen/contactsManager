@@ -17,7 +17,7 @@ class ContactsStore {
   }
 
   get filterContacts() {
-    let filteredContacts = this.contacts.filter(contact => contact.name.includes(this.filter))
+    let filteredContacts = this.contacts.filter(contact => contact.name.toLowerCase().includes(this.filter.toLowerCase()))
     return filteredContacts
   };
 
