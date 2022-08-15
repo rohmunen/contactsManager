@@ -22,7 +22,7 @@ export class Contact {
       const newContact = await pool.query(`
       INSERT INTO contacts 
       (creator, name, phone) 
-      VALUES ('${contact.creator}', '${contact.name}', '${contact.phone}') RETURNING creator, name, phone;`)
+      VALUES ('${contact.creator}', '${contact.name}', '${contact.phone}') RETURNING id, creator, name, phone;`)
       return newContact.rows[ 0 ]
     } catch (error) {
       console.log('error creating contact', error)
@@ -37,7 +37,7 @@ export class Contact {
       if (contact.phone) {
         await pool.query(`UPDATE contacts SET phone = '${contact.phone}' WHERE id = ${id};`)
       }
-      return { id: id }
+      return { id: id, ...contact }
     } catch (error) {
       console.log('error updating contact', error)
     }

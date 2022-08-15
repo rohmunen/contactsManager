@@ -20,6 +20,13 @@ export const ContactsAPI = {
     })
   },
 
+  update: async (data: ResContact) => {
+    return API.put<ResContact>({
+      url: PATHS.CONTACTS + `/${data.id}`,
+      data
+    })
+  },
+
   delete: async (id: number) => {
     return API.delete<ResDeleteContact>({
       url: PATHS.CONTACTS + `/${id}`,

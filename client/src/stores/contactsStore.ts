@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { ReqContact, ResContact } from '../api/contacts/classes';
+import { ReqContact, ResContact, ResGetContacts } from '../api/contacts/classes';
 import { ContactsAPI } from '../api/contacts/routes';
 
 class ContactsStore {
@@ -53,9 +53,19 @@ class ContactsStore {
   }
 
   removeContact = (id: number) => {
-    console.log(this.contacts)
-    console.log(this.contacts.filter(contact => contact.id !== id))
     this.contacts = this.contacts.filter(contact => contact.id !== id)
+  }
+
+  updateContact = (contact: ResContact) => {
+    let index = this.contacts.findIndex(item => item.id === contact.id)
+    this.contacts[index] = contact
+  }
+ 
+  update = async (contact: ResContact) => {
+    const resp = await ContactsAPI.update(contact)
+    if (resp.data) {
+      this.updateContact(resp.data)
+    }
   }
 
   delete = async (id: number) => {

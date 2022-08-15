@@ -7,6 +7,7 @@ import { observer } from 'mobx-react-lite';
 import ContactCard from './Contact';
 import { useForm } from '@mantine/form';
 import NumberFormat from 'react-number-format';
+import ContactModal from './ContactModal';
 
 const Contacts = observer(() => {
   useEffect(() => {
@@ -28,26 +29,12 @@ const Contacts = observer(() => {
       <Button onClick={ () => { setOpened(true) } } className={ styles.contacts__button } radius="xs" size="md">
         Add contact
       </Button>
+      <ContactModal opened={opened} setOpened={setOpened} />
       <TextInput
         label="Search for a contact"
         placeholder="contact name"
         onChange={ (e) => { contactsStore.setPage(1); contactsStore.setFilter(e.target.value) } }
       />
-      <Modal title="Создайте контакт!" opened={ opened } onClose={ () => setOpened(false) }>
-        <form onSubmit={ form.onSubmit((values) => { contactsStore.create(values) }) }>
-          <TextInput
-            label="Email"
-            placeholder="your@email.com"
-            { ...form.getInputProps('name') }
-          />
-          <Input.Wrapper label="Номер телефона">
-            <NumberFormat { ...form.getInputProps('phone') } placeholder='+7 (777)-777-77-77' customInput={ TextInput } format="+7 (###)-###-##-##" />
-          </Input.Wrapper>
-          <Group position="center" mt="md">
-            <Button className={ styles.signUp__submit } type="submit">Создать</Button>
-          </Group>
-        </form>
-      </Modal>
       <section className={ styles.contacts__cards }>
         {
           contactsStore.pagedContacts.map((contact) =>
