@@ -9,9 +9,17 @@
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
+
+}
+@media screen and (max-width: 700px) {
+  .content {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .content__text {
+  height: 100%;
   display: flex;
   flex-flow: column;
   padding: 100px 50px 0 50px;

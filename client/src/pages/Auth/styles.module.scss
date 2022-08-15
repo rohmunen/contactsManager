@@ -4,18 +4,17 @@
   label {
     color: $white-darken;
   }
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 1fr;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
+  display: flex;
   height: 100%;
+  justify-content: center;
+  margin-top: 100px;
   background-color: $color-secondary;
 }
 
-
-
 .signUp__form {
+  height: 367.37px;
+  box-sizing: border-box;
+  border-radius: 10px;
   grid-area: 1 / 2 / 2 / 3;
   padding: 50px;
   background-color: $color-primary;
@@ -40,3 +39,4 @@
   }
   background-color: $color-secondary;
 }
+

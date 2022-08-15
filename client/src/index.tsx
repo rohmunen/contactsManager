@@ -27,7 +27,6 @@ root.render(
         <MainLayout>
           <Routes>
             <Route path="/" element={ <Home /> } />
-            <Route path="/signup" element={ <Auth /> } />
             <Route path="contacts" element={
               <ProtectedRoute>
                 <Contacts />
