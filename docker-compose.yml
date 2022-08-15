@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14.5
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "root"
+    ports:
+      - "5432:5432"
+  server:
+    container_name: server
+    build:
+      context: .
+      dockerfile: ./server/Dockerfile
+    volumes: [".:/server'", "/server/node_modules"]
+    depends_on:
+      - 'postgres'
+    ports: ["8080:8080"]
+    env_file: ./server/.env
+  client:
+    container_name: client
+    build:
+      context: .
+      dockerfile: ./client/Dockerfile
+    volumes: [".:/client'", "/client/node_modules"]
+    depends_on:
+      - 'server'
+    ports: ["3000:3000"]

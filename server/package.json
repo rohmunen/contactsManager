@@ -18,7 +18,7 @@
     "uuid": "^8.3.2"
   },
   "scripts": {
-    "dev": "nodemon src/index.ts",
+    "start": "nodemon src/index.ts",
     "migrate-up": "ts-node src/database/migrations/migrate-up.ts",
     "migrate-down": "ts-node src/database/migrations/migrate-down.ts"
   },
