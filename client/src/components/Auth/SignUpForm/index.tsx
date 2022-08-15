@@ -2,6 +2,7 @@ import { TextInput, Button, Group } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import styles from '../styles.module.scss'
 import { authStore } from '../../../stores/authStore';
+import { PrimaryButton } from '../../Buttons/PrimaryButton';
 
 const SignUpForm = () => {
   const form = useForm({
@@ -35,7 +36,7 @@ const SignUpForm = () => {
         { ...form.getInputProps('password') }
       />
       <Group position="center" mt="md">
-        <Button className={ styles.signUp__submit } type="submit">Зарегистрироваться</Button>
+        <PrimaryButton text="Зарегистрироваться" type="submit" />
       </Group>
     </form>
   )

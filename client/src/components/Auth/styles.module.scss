@@ -20,14 +20,7 @@
   background-color: $color-primary;
 }
 
-.signUp__submit {
-  width: 100%;
-  color: $color-primary;
-  background-color: $color-secondary;
-  &:hover {
-    background-color: $color-secondary;
-  }
-}
+
 .auth__option {
   label {
     color: $color-primary;

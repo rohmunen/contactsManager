@@ -5,6 +5,7 @@ import { observer } from 'mobx-react-lite';
 import { useForm } from '@mantine/form';
 import NumberFormat from 'react-number-format';
 import { ResContact } from '../../../api/contacts/classes';
+import { PrimaryButton } from '../../../components/Buttons/PrimaryButton';
 
 type Props = {
   opened: boolean,
@@ -37,7 +38,7 @@ const ContactModal = observer((props: Props) => {
           <NumberFormat { ...form.getInputProps('phone') } placeholder='+7 (777)-777-77-77' customInput={ TextInput } format="+7 (###)-###-##-##" />
         </Input.Wrapper>
         <Group position="center" mt="md">
-          <Button className={ styles.modal__submit } type="submit">{contact ? 'Сохранить' : 'Создать'}</Button>
+          <PrimaryButton text={ contact ? 'Сохранить' : 'Создать' } type="submit" />
         </Group>
       </form>
     </Modal>
