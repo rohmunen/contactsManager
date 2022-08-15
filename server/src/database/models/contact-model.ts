@@ -14,6 +14,9 @@ export class Contact {
   }
 
   static async validateCreateContact(contact: Contact) {
+    if (contact.name.length > 39) {
+      throw ApiError.BadRequest('Слишком длинное имя!')
+    }
     let dbContact = await this.getByPhone(contact.phone, contact.creator)
     if (dbContact.length > 0) {
       throw ApiError.BadRequest('Контакт с таким номером телефона уже существует')
@@ -25,6 +28,9 @@ export class Contact {
   }
 
   static async validateUpdateContact(contact: Contact) {
+    if (contact.name.length > 39) {
+      throw ApiError.BadRequest('Слишком длинное имя!')
+    }
     let dbContact = await this.getByPhone(contact.phone, contact.creator)
     if (dbContact.filter(item => item.id != contact.id).length > 0) {
       throw ApiError.BadRequest('Контакт с таким номером телефона уже существует')

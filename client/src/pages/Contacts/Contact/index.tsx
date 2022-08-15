@@ -18,7 +18,7 @@ const ContactCard = (props: Props) => {
       <ContactModal contact={ contact } opened={ opened } setOpened={ setOpened } />
       <CloseButton onClick={ () => { contactsStore.delete(contact.id) } } className={ styles.card__close } />
       <Group position="apart" mt="md" mb="xs">
-        <Text weight={ 500 }>{ contact.name }</Text>
+        <Text className={styles.card__name} weight={ 500 }>{ contact.name }</Text>
       </Group>
       <Text size="sm" color="dimmed">
         { contact.phone }
