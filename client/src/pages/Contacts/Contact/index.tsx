@@ -8,14 +8,14 @@ import ContactModal from '../ContactModal';
 type Props = {
   contact: ResContact
 }
-
+//TODO: move modal out of this component to clear html
 const ContactCard = (props: Props) => {
   const { contact } = props
   const [ opened, setOpened ] = useState(false);
   return (
     <Card className={ styles.card } shadow="sm" p="lg" radius="md" withBorder>
       <Button onClick={() => setOpened(true)} className={ styles.card__edit }>Edit</Button>
-      <ContactModal contact={ contact } opened={ opened } setOpened={ setOpened } />
+      <ContactModal contact={ contact } opened={ opened } setOpened={ setOpened } /> 
       <CloseButton onClick={ () => { contactsStore.delete(contact.id) } } className={ styles.card__close } />
       <Group position="apart" mt="md" mb="xs">
         <Text className={styles.card__name} weight={ 500 }>{ contact.name }</Text>
