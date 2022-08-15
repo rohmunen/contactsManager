@@ -79,7 +79,7 @@ class AuthStore {
   check = async () => {
     this.setLoading(true)
     const resp = await AuthAPI.check()
-    if (resp.data) {
+    if (resp.isSuccess) {
       this.setInit(true)
     } else {
       this.setInit(false)
