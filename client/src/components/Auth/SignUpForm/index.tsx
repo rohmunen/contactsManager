@@ -12,6 +12,8 @@ const SignUpForm = () => {
     },
     validate: {
       email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+      password: (value) => (value.length > 4 ? null : 'Слишком короткий пароль'),
+      nickname: (value) => (value.length > 4 ? null : 'Короткий никнейм'),
     },
   });
   return (

@@ -21,14 +21,16 @@ const ContactModal = observer((props: Props) => {
     },
 
     validate: {
+      name: (value) => (value.length > 0 ? null : 'Слишком короткое имя'),
+      phone: (value) => (value.length === 18 ? null : 'Заполните телефон'),
     },
   });
   return (
     <Modal title={ contact ? "Изменить контакт" : "Создайте контакт!" } opened={ opened } onClose={ () => setOpened(false) }>
       <form onSubmit={ contact ? form.onSubmit((values) => { console.log({ ...contact, ...values }); contactsStore.update({ ...contact, ...values }) }) : form.onSubmit((values) => { contactsStore.create(values) }) }>
         <TextInput
-          label="Email"
-          placeholder="your@email.com"
+          label="Имя"
+          placeholder="John K."
           { ...form.getInputProps('name') }
         />
         <Input.Wrapper label="Номер телефона">
