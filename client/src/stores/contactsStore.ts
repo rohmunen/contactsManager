@@ -1,6 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 import { ReqContact, ResContact } from '../api/contacts/classes';
 import { ContactsAPI } from '../api/contacts/routes';
+import { showError } from '../utils/notifications';
 
 class ContactsStore {
   contacts: ResContact[] = [];
@@ -49,6 +50,8 @@ class ContactsStore {
     const resp = await ContactsAPI.create(data)
     if (resp.data) {
       this.addContact(resp.data)
+    } else {
+      showError(resp.message!)
     }
   }
 
@@ -58,13 +61,15 @@ class ContactsStore {
 
   updateContact = (contact: ResContact) => {
     let index = this.contacts.findIndex(item => item.id === contact.id)
-    this.contacts[index] = contact
+    this.contacts[ index ] = contact
   }
- 
+
   update = async (contact: ResContact) => {
     const resp = await ContactsAPI.update(contact)
     if (resp.data) {
       this.updateContact(resp.data)
+    } else {
+      showError(resp.message!)
     }
   }
 
@@ -72,6 +77,8 @@ class ContactsStore {
     const resp = await ContactsAPI.delete(id)
     if (resp.data) {
       this.removeContact(id)
+    } else {
+      showError('Что-то пошло не так при удалении контакта')
     }
   }
 }

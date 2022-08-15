@@ -1,3 +1,4 @@
+import { ApiError } from "../../utils/api-errors"
 import { pool } from "../client"
 
 
@@ -12,12 +13,30 @@ export class Contact {
     this.phone = phone
   }
 
-  // static async beforeCreate(tag) {
-  //   Validator.ValidateTagName(tag.name)
-  // }
+  static async validateCreateContact(contact: Contact) {
+    let dbContact = await this.getByPhone(contact.phone, contact.creator)
+    if (dbContact.length > 0) {
+      throw ApiError.BadRequest('Контакт с таким номером телефона уже существует')
+    }
+    dbContact = await this.getByName(contact.name, contact.creator)
+    if (dbContact.length > 0) {
+      throw ApiError.BadRequest('Контакт с таким именем уже существует')
+    }
+  }
+
+  static async validateUpdateContact(contact: Contact) {
+    let dbContact = await this.getByPhone(contact.phone, contact.creator)
+    if (dbContact.filter(item => item.id != contact.id).length > 0) {
+      throw ApiError.BadRequest('Контакт с таким номером телефона уже существует')
+    }
+    dbContact = await this.getByName(contact.name, contact.creator)
+    if (dbContact.filter(item => item.id != contact.id).length > 0) {
+      throw ApiError.BadRequest('Контакт с таким именем уже существует')
+    }
+  }
 
   static async create(contact: Contact) {
-    //await this.beforeCreate(tag)
+    await this.validateCreateContact(contact)
     try {
       const newContact = await pool.query(`
       INSERT INTO contacts 
@@ -30,6 +49,7 @@ export class Contact {
   }
 
   static async update(id: string, contact: Contact) {
+    await this.validateUpdateContact(contact)
     try {
       if (contact.name) {
         await pool.query(`UPDATE contacts SET name = '${contact.name}' WHERE id = ${id};`)
@@ -47,6 +67,24 @@ export class Contact {
     try {
       const data = await pool.query(`SELECT * FROM contacts WHERE id = '${id}';`)
       return data.rows[ 0 ] as Contact
+    } catch (error) {
+      console.log('error getting contacts', error)
+    }
+  }
+
+  static async getByPhone(phone: string, creator: string) {
+    try {
+      const data = await pool.query<Contact>(`SELECT * FROM contacts WHERE phone = '${phone}' and creator='${creator}';`)
+      return data.rows
+    } catch (error) {
+      console.log('error getting contacts', error)
+    }
+  }
+
+  static async getByName(name: string, creator: string) {
+    try {
+      const data = await pool.query<Contact>(`SELECT * FROM contacts WHERE name = '${name}' and creator='${creator}';`)
+      return data.rows
     } catch (error) {
       console.log('error getting contacts', error)
     }

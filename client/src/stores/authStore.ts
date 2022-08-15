@@ -2,8 +2,8 @@ import { AuthAPI } from '../api/auth/routes';
 import { makeAutoObservable } from 'mobx';
 import { API } from '../network/client';
 import { AxiosRequestConfig } from 'axios';
-import { showNotification } from '@mantine/notifications';
 import { ReqSignIn, ReqSignUp } from '../api/auth/classes';
+import { showError } from '../utils/notifications';
 
 class AuthStore {
   init: boolean = false;
@@ -63,7 +63,7 @@ class AuthStore {
     if (resp.data) {
       this.setAuth({ accessToken: resp.data?.tokens.accessToken, refreshToken: resp.data?.tokens.refreshToken })
     } else {
-      showNotification({ title: "Ошибка!", message: "такой пользователь уже существует!", color: "red" })
+      showError('Такой пользователь уже существует!')
     }
   }
 
@@ -72,7 +72,7 @@ class AuthStore {
     if (resp.data) {
       this.setAuth({ accessToken: resp.data?.tokens.accessToken, refreshToken: resp.data?.tokens.refreshToken })
     } else {
-      showNotification({ title: "Ошибка!", message: "неверный пароль или email.", color: "red" })
+      showError('Неверный пароль или email')
     }
   }
 
