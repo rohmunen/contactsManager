@@ -62,5 +62,3 @@ export const migrateUp = async () => {
   await createDbIfNotExists()
   await checkForTables()
 }
-
-migrateUp()
