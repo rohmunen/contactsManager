@@ -14,8 +14,7 @@ const ContactCard = (props: Props) => {
   const [ opened, setOpened ] = useState(false);
   return (
     <Card className={ styles.card } shadow="sm" p="lg" radius="md" withBorder>
-      <Button onClick={() => setOpened(true)} className={ styles.card__edit }>Edit</Button>
-      <ContactModal contact={ contact } opened={ opened } setOpened={ setOpened } /> 
+      <Button onClick={() => contactsStore.setSelectedContact(contact) } className={ styles.card__edit }>Edit</Button>
       <CloseButton onClick={ () => { contactsStore.delete(contact.id) } } className={ styles.card__close } />
       <Group position="apart" mt="md" mb="xs">
         <Text className={styles.card__name} weight={ 500 }>{ contact.name }</Text>

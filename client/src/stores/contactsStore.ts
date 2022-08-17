@@ -7,9 +7,14 @@ class ContactsStore {
   contacts: ResContact[] = [];
   filter: string = '';
   page: number = 1;
+  selectedContact: ResContact | undefined = undefined;
 
   constructor() {
     makeAutoObservable(this);
+  }
+
+  setSelectedContact = (contact: ResContact | undefined) => {
+    this.selectedContact = contact
   }
 
   setContacts = (contacts: ResContact[]) => {

@@ -16,7 +16,8 @@ const Contacts = observer(() => {
       <Button onClick={ () => { setOpened(true) } } className={ styles.contacts__button } radius="xs" size="md">
         Добавить контакт
       </Button>
-      <ContactModal opened={ opened } setOpened={ setOpened } />
+      <ContactModal titleText='Измените контакт!' buttonText='Сохранить' opened={ contactsStore.selectedContact != undefined } setOpened={ () => contactsStore.setSelectedContact(undefined)  } />
+      <ContactModal titleText='Создайте контакт!' buttonText='Создать' opened={ opened } setOpened={ setOpened } />
       <TextInput
         label="Найти контакт"
         placeholder="Имя"
