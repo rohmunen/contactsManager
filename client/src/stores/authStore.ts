@@ -31,7 +31,6 @@ class AuthStore {
     })
     API.setOnAuthError(async () => {
       const resp = await AuthAPI.refresh();
-      console.log(resp)
       if (resp.isSuccess) {
         if (resp.data) {
           this.setAuth(resp.data.tokens);
@@ -44,7 +43,6 @@ class AuthStore {
   }
   //TODO: extend type 'data'
   setAuth = (data: { accessToken: string; refreshToken: string }) => {
-    console.log('DEV: SetUserTokens', JSON.stringify(data));
     localStorage.setItem('accessToken', data.accessToken)
     localStorage.setItem('refreshToken', data.refreshToken)
     this.setInit(true)

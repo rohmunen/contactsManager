@@ -6,19 +6,24 @@ import { useForm } from '@mantine/form';
 import NumberFormat from 'react-number-format';
 import { ResContact } from '../../../api/contacts/classes';
 import { PrimaryButton } from '../../../components/Buttons/PrimaryButton';
+import { useEffect } from 'react';
 
 type Props = {
+  titleText: string,
+  buttonText: string,
   opened: boolean,
   setOpened: React.Dispatch<React.SetStateAction<boolean>>,
-  contact?: ResContact
 }
 
 const ContactModal = observer((props: Props) => {
-  const { contact, opened, setOpened } = props
+  const { titleText, buttonText, opened, setOpened } = props
+  useEffect(() => {
+    form.setValues(contactsStore.selectedContact || { name: '', phone: '' })
+  }, [ contactsStore.selectedContact ])
   const form = useForm({
     initialValues: {
-      name: contact?.name || '',
-      phone: contact?.phone || ''
+      name: '',
+      phone: ''
     },
 
     validate: {
@@ -27,18 +32,31 @@ const ContactModal = observer((props: Props) => {
     },
   });
   return (
-    <Modal title={ contact ? "Изменить контакт" : "Создайте контакт!" } opened={ opened } onClose={ () => { setOpened(false); form.setValues({ name: contact?.name || '', phone: contact?.phone || '' }) } }>
-      <form onSubmit={ contact ? form.onSubmit((values) => { console.log({ ...contact, ...values }); contactsStore.update({ ...contact, ...values }) }) : form.onSubmit((values) => { contactsStore.create(values) }) }>
+    <Modal
+      title={ titleText }
+      opened={ opened }
+      onClose={ () => { setOpened(false) } }
+      transition={ 'fade' }
+      transitionDuration={ 300 }
+    >
+      <form 
+      onSubmit=
+      { 
+        contactsStore.selectedContact ? 
+        form.onSubmit((values) => { contactsStore.update({ ...values, id: contactsStore.selectedContact!.id }) }) // если контакт выбран и мы обновляем его
+        : 
+        form.onSubmit((values) => { contactsStore.create(values) }) } // если контакт не выбран и мы создаем новый
+        >
         <TextInput
           label="Имя"
           placeholder="John K."
           { ...form.getInputProps('name') }
         />
-        <Input.Wrapper label="Номер телефона" onChange={ (e) => { console.log(form.values.phone) } }>
+        <Input.Wrapper label="Номер телефона">
           <NumberFormat { ...form.getInputProps('phone') } placeholder='+7-(777)-777-77-77' customInput={ TextInput } format="+7-(###)-###-##-##" />
         </Input.Wrapper>
         <Group position="center" mt="md">
-          <PrimaryButton text={ contact ? 'Сохранить' : 'Создать' } type="submit" />
+          <PrimaryButton text={ buttonText } type="submit" />
         </Group>
       </form>
     </Modal>
