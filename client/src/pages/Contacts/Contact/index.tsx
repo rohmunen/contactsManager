@@ -10,7 +10,6 @@ type Props = {
 //TODO: move modal out of this component to clear html
 const ContactCard = memo((props: Props) => {
   const { contact } = props
-  console.log('rendering contact')
   return (
     <Card className={ styles.card } shadow="sm" p="lg" radius="md" withBorder>
       <Button onClick={() => contactsStore.setSelectedContact(contact) } className={ styles.card__edit }>Edit</Button>
