@@ -2,8 +2,6 @@ import styles from './styles.module.scss'
 import { ResContact } from '../../../api/contacts/classes';
 import { Card, Text, Group, CloseButton, Button } from '@mantine/core';
 import { contactsStore } from '../../../stores/contactsStore';
-import { useState } from 'react';
-import ContactModal from '../ContactModal';
 
 type Props = {
   contact: ResContact
@@ -11,7 +9,6 @@ type Props = {
 //TODO: move modal out of this component to clear html
 const ContactCard = (props: Props) => {
   const { contact } = props
-  const [ opened, setOpened ] = useState(false);
   return (
     <Card className={ styles.card } shadow="sm" p="lg" radius="md" withBorder>
       <Button onClick={() => contactsStore.setSelectedContact(contact) } className={ styles.card__edit }>Edit</Button>
