@@ -35,18 +35,18 @@ const ContactModal = observer((props: Props) => {
     <Modal
       title={ titleText }
       opened={ opened }
-      onClose={ () => { setOpened(false) } }
+      onClose={ () => { setOpened(false); form.reset() } }
       transition={ 'fade' }
       transitionDuration={ 300 }
     >
-      <form 
-      onSubmit=
-      { 
-        contactsStore.selectedContact ? 
-        form.onSubmit((values) => { contactsStore.update({ ...values, id: contactsStore.selectedContact!.id }) }) // если контакт выбран и мы обновляем его
-        : 
-        form.onSubmit((values) => { contactsStore.create(values) }) } // если контакт не выбран и мы создаем новый
-        >
+      <form
+        onSubmit=
+        {
+          contactsStore.selectedContact ?
+            form.onSubmit((values) => { contactsStore.update({ ...values, id: contactsStore.selectedContact!.id }) }) // если контакт выбран и мы обновляем его
+            :
+            form.onSubmit((values) => { contactsStore.create(values); form.reset() }) } // если контакт не выбран и мы создаем новый
+      >
         <TextInput
           label="Имя"
           placeholder="John K."
