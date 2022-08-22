@@ -2,13 +2,15 @@ import styles from './styles.module.scss'
 import { ResContact } from '../../../api/contacts/classes';
 import { Card, Text, Group, CloseButton, Button } from '@mantine/core';
 import { contactsStore } from '../../../stores/contactsStore';
+import { memo } from 'react';
 
 type Props = {
   contact: ResContact
 }
 //TODO: move modal out of this component to clear html
-const ContactCard = (props: Props) => {
+const ContactCard = memo((props: Props) => {
   const { contact } = props
+  console.log('rendering contact')
   return (
     <Card className={ styles.card } shadow="sm" p="lg" radius="md" withBorder>
       <Button onClick={() => contactsStore.setSelectedContact(contact) } className={ styles.card__edit }>Edit</Button>
@@ -21,6 +23,6 @@ const ContactCard = (props: Props) => {
       </Text>
     </Card>
   )
-}
+})
 
 export default ContactCard;
