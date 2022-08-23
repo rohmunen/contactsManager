@@ -7,7 +7,6 @@ import React from 'react';
 
 
 const ContactCard: FunctionComponent<ResContact> = React.memo((item) => {
-  console.log('contact rendered')
   return (
     <Card className={ styles.card } shadow="sm" p="lg" radius="md" withBorder>
       <Button onClick={ () => contactsStore.setSelectedContact(item) } className={ styles.card__edit }>Edit</Button>
