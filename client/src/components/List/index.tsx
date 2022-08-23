@@ -15,10 +15,10 @@ export function List<T extends ListItem>({
   renderEmpty,
   renderItem
 }: Props<T>) {
-  const FunctionalComp = renderItem
+  const RenderItem = renderItem
   if (data.length > 0) {
     return <>
-      { data.map(item => <FunctionalComp key={ item.id } { ...item } />) }
+      { data.map(item => <RenderItem key={ item.id } { ...item } />) }
     </>
   } else {
     return <div className={ styles.empty }>
